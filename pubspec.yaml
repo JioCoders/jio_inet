@@ -1,13 +1,14 @@
 name: jio_inet
 description: "Flutter plugin to check current connection and listener on connection changed."
 version: 0.0.1
-homepage: https://github.com/JioCoders/inet
-repository: https://github.com/JioCoders/inet.git
-issue_tracker: https://github.com/JioCoders/inet/issues
+homepage: https://github.com/JioCoders/jio_inet
+repository: https://github.com/JioCoders/jio_inet.git
+issue_tracker: https://github.com/JioCoders/jio_inet/issues
 topics:
-  - INet
-  - Check internet connection
-  - Network connection
+  - inet
+  - internet
+  - connection
+  - network
   - utils
 
 environment:
