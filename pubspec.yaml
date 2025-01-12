@@ -1,0 +1,60 @@
+name: jio_inet
+description: "Flutter plugin to check current connection and listener on connection changed."
+version: 0.0.1
+homepage: https://github.com/JioCoders/inet
+repository: https://github.com/JioCoders/inet.git
+issue_tracker: https://github.com/JioCoders/inet/issues
+topics:
+  - INet
+  - Check internet connection
+  - Network connection
+  - utils
+
+environment:
+  sdk: ^3.5.3
+  flutter: '>=3.3.0'
+
+dependencies:
+  collection: ^1.18.0
+  flutter:
+    sdk: flutter
+  plugin_platform_interface: ^2.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  build_runner: ^2.4.13
+  mockito: ^5.4.4
+  logger: ^2.5.0
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter:
+  # This section identifies this Flutter project as a plugin project.
+  # The 'pluginClass' specifies the class (in Java, Kotlin, Swift, Objective-C, etc.)
+  # which should be registered in the plugin registry. This is required for
+  # using method channels.
+  # The Android 'package' specifies package in which the registered class is.
+  # This is required for using method channels on Android.
+  # The 'ffiPlugin' specifies that native code should be built and bundled.
+  # This is required for using `dart:ffi`.
+  # All these are used by the tooling to maintain consistency when
+  # adding or updating assets for this project.
+  plugin:
+    platforms:
+      android:
+        package: com.jiocoders.jio_inet
+        pluginClass: JioInetPlugin
+      ios:
+        pluginClass: JioInetPlugin
+
+  # To add assets to your plugin package, add an assets section, like this:
+  # assets:
+  #   - images/a_dot_burr.jpeg
+  #   - images/a_dot_ham.jpeg
+  #
