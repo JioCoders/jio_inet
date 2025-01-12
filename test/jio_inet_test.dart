@@ -5,7 +5,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:jio_inet/jio_inet.dart';
 import 'package:jio_inet/jio_inet_platform_interface.dart';
 import 'package:jio_inet/jio_inet_method_channel.dart';
-import 'package:jio_inet/src/utils.dart';
 import 'package:logger/logger.dart';
 import 'package:mockito/mockito.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
