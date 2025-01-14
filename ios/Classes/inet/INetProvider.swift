@@ -1,6 +1,6 @@
 import Foundation
 
-public enum IConnectType {
+public enum INetType {
   case none
   case ethernet
   case wifi
@@ -8,12 +8,12 @@ public enum IConnectType {
   case other
 }
 
-public protocol IConnectProvider: NSObjectProtocol {
-  typealias IConnectUpdateHandler = ([IConnectType]) -> Void
+public protocol INetProvider: NSObjectProtocol {
+  typealias INetUpdateHandler = ([INetType]) -> Void
   
-  var currentConnectTypes: [IConnectType] { get }
+  var currentInetTypes: [INetType] { get }
   
-  var iConnectUpdateHandler: IConnectUpdateHandler? { get set }
+  var iNetUpdateHandler: INetUpdateHandler? { get set }
   
   func start()
   

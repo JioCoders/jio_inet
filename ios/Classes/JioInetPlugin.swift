@@ -3,29 +3,29 @@ import UIKit
 
 public class JioInetPlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
 
-  private let iConnectProvider: IConnectProvider
+  private let iNetProvider: INetProvider
   private var eventSink: FlutterEventSink?
 
   public static func register(with registrar: FlutterPluginRegistrar) {
     let channel = FlutterMethodChannel(name: "com.jiocoders/jio_inet", binaryMessenger: registrar.messenger())
     let streamChannel = FlutterEventChannel(name: "com.jiocoders/jio_inet_status", binaryMessenger: registrar.messenger())
 
-    let iConnectProvider = PathMonitorIConnect()
-    let instance = JioInetPlugin(iConnectProvider: iConnectProvider)
+    let iNetProvider = PathMonitorINet()
+    let instance = JioInetPlugin(iNetProvider: iNetProvider)
 
     streamChannel.setStreamHandler(instance)
     registrar.addMethodCallDelegate(instance, channel: channel)
   }
 
-  init(iConnectProvider: IConnectProvider) {
-    self.iConnectProvider = iConnectProvider
+  init(iNetProvider: INetProvider) {
+    self.iNetProvider = iNetProvider
     super.init()
-    self.iConnectProvider.iConnectUpdateHandler = iConnectUpdateHandler
+    self.iNetProvider.iNetUpdateHandler = iNetUpdateHandler
   }
 
   public func detachFromEngine(for registrar: FlutterPluginRegistrar) {
     eventSink = nil
-    iConnectProvider.stop()
+    iNetProvider.stop()
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
@@ -33,20 +33,20 @@ public class JioInetPlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
     case "getPlatformVersion":
       result("iOS " + UIDevice.current.systemVersion)
     case "inet_type":
-      result(statusFrom(connectTypes: iConnectProvider.currentConnectTypes))
+      result(statusFromList(connectTypes: iNetProvider.currentInetTypes))
     case "start_monitoring":
-        iConnectProvider.start()
+        iNetProvider.start()
         result("started")
     case "stop_monitoring":
-        iConnectProvider.stop()
+        iNetProvider.stop()
         result("stopped")
     default:
       result(FlutterMethodNotImplemented)
     }
   }
 
-  private func statusFrom(iConnectType: IConnectType) -> String {
-    switch iConnectType {
+  private func statusFrom(iNetType: INetType) -> String {
+    switch iNetType {
     case .wifi:
       return "wifi"
     case .cellular:
@@ -60,15 +60,15 @@ public class JioInetPlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
     }
   }
 
-  private func statusFrom(connectTypes: [IConnectType]) -> [String] {
+  private func statusFromList(connectTypes: [INetType]) -> [String] {
     return connectTypes.map {
-      self.statusFrom(iConnectType: $0)
+      self.statusFrom(iNetType: $0)
     }
   }
 
-  private func iConnectUpdateHandler(iConnectTypes: [IConnectType]) {
+  private func iNetUpdateHandler(iConnectTypes: [INetType]) {
     DispatchQueue.main.async {
-      self.eventSink?(self.statusFrom(connectTypes: iConnectTypes))
+      self.eventSink?(self.statusFromList(connectTypes: iConnectTypes))
     }
   }
 
@@ -77,14 +77,14 @@ public class JioInetPlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
     eventSink events: @escaping FlutterEventSink
   ) -> FlutterError? {
     eventSink = events
-    iConnectProvider.start()
+    iNetProvider.start()
     // Update this to handle a list
-    iConnectUpdateHandler(iConnectTypes: iConnectProvider.currentConnectTypes)
+    iNetUpdateHandler(iConnectTypes: iNetProvider.currentInetTypes)
     return nil
   }
 
   public func onCancel(withArguments _: Any?) -> FlutterError? {
-    iConnectProvider.stop()
+    iNetProvider.stop()
     eventSink = nil
     return nil
   }

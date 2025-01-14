@@ -1,7 +1,7 @@
 import Foundation
 import Network
 
-public class PathMonitorIConnect: NSObject, IConnectProvider {
+public class PathMonitorINet: NSObject, INetProvider {
 
   // Use .utility, as it is intended for tasks that the user does not track actively.
   // See: https://developer.apple.com/documentation/dispatch/dispatchqos
@@ -32,12 +32,12 @@ public class PathMonitorIConnect: NSObject, IConnectProvider {
     return types.isEmpty ? [.none] : types
   }
 
-  public var currentConnectTypes: [INetType] {
+  public var currentInetTypes: [INetType] {
     let path = ensurePathMonitor().currentPath
     return connectFrom(path: path)
   }
 
-  public var iConnectUpdateHandler: IConnectUpdateHandler?
+  public var iNetUpdateHandler: INetUpdateHandler?
 
   override init() {
     super.init()
@@ -65,6 +65,6 @@ public class PathMonitorIConnect: NSObject, IConnectProvider {
   }
 
   private func pathUpdateHandler(path: NWPath) {
-    iConnectUpdateHandler?(connectFrom(path: path))
+    iNetUpdateHandler?(connectFrom(path: path))
   }
 }
