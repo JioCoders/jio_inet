@@ -7,6 +7,11 @@
 Flutter plugin for both android and iOS to check the status of internet connection and listener when the internet
 connection is changed.
 
+## Features
+
+- Current network connection check
+- Listen to current network connection change
+
 ## Performance Metrics
 
 - **Build Status:** The current status of the CI build.
@@ -204,6 +209,8 @@ void dispose() {
   _iNetSubscription.cancel();
 }
 ```
+
+[![Pub](https://img.shields.io/pub/v/jio_inet.svg)](https://pub.dev/packages/jio_inet)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![codecov](https://codecov.io/gh/jiocoders/jio_inet/branch/main/graph/badge.svg)](https://codecov.io/gh/jiocoders/jio_inet)
 [![GitHub release](https://img.shields.io/github/release/jiocoders/jio_inet.svg)](https://GitHub.com/jiocoders/jio_inet/releases/)
