@@ -4,7 +4,7 @@ import PackageDescription
 
 let package = Package(
     name: "jio_inet",
-    platforms: [.iOS(.v10)],
+    platforms: [.iOS(.v10)], // Set the minimum iOS version
     products: [
         .library(
             name: "jio_inet",
@@ -18,6 +18,8 @@ let package = Package(
             resources: [
                 .process("PrivacyInfo.xcprivacy"),
             ],
-            path: "path/to/source")
+            // path: "path/to/source"),
+            path: "ios/Classes",
+            publicHeadersPath: "" // Specify if there are public headers
     ]
 )
