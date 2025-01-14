@@ -7,3 +7,8 @@
 
 * Repo update
 * included ci and repo update
+
+## 1.1.1
+
+* fixed/iOS listener
+* github action badge update
