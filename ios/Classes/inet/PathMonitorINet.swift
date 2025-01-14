@@ -10,8 +10,8 @@ public class PathMonitorIConnect: NSObject, IConnectProvider {
 
   private var pathMonitor: NWPathMonitor?
 
-  private func connectFrom(path: NWPath) -> [IConnectType] {
-    var types: [IConnectType] = []
+  private func connectFrom(path: NWPath) -> [INetType] {
+    var types: [INetType] = []
     
     // Check for connectivity and append to types array as necessary
     if path.status == .satisfied {
@@ -32,7 +32,7 @@ public class PathMonitorIConnect: NSObject, IConnectProvider {
     return types.isEmpty ? [.none] : types
   }
 
-  public var currentConnectTypes: [IConnectType] {
+  public var currentConnectTypes: [INetType] {
     let path = ensurePathMonitor().currentPath
     return connectFrom(path: path)
   }

@@ -11,7 +11,7 @@ public class JioInetPlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
     let streamChannel = FlutterEventChannel(name: "com.jiocoders/jio_inet_status", binaryMessenger: registrar.messenger())
 
     let iConnectProvider = PathMonitorIConnect()
-    let instance = JioInetPlugin(iNetProvider: iConnectProvider)
+    let instance = JioInetPlugin(iConnectProvider: iConnectProvider)
 
     streamChannel.setStreamHandler(instance)
     registrar.addMethodCallDelegate(instance, channel: channel)
