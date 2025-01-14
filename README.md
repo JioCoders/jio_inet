@@ -1,6 +1,6 @@
 # jio_inet
 
-![Flutter CI](https://github.com/jiocoders/jio_inet/actions/workflows/flutter_ci.yml/badge.svg)
+![Flutter CI](https://github.com/jiocoders/jio_inet/actions/workflows/flutter-ci.yml/badge.svg)
 
 ## Description
 
