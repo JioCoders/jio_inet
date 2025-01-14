@@ -1,7 +1,19 @@
 # jio_inet
 
+![Flutter CI](https://github.com/JioCoders/jio_inet/actions/workflows/flutter_ci.yml/badge.svg)
+
+## Description
+
 Flutter plugin for both android and iOS to check the status of internet connection and listener when the internet
 connection is changed.
+
+## Performance Metrics
+
+- **Build Status:** The current status of the CI build.
+- **Test Coverage:** Information about test coverage (if you have a coverage tool integrated).
+- **Build Time:** Average build time for the CI.
+
+## Getting Started
 
 Published package url -
 ```
@@ -192,3 +204,6 @@ void dispose() {
   _iNetSubscription.cancel();
 }
 ```
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![codecov](https://codecov.io/gh/jiocoders/jio_inet/branch/main/graph/badge.svg)](https://codecov.io/gh/jiocoders/jio_inet)
+[![GitHub release](https://img.shields.io/github/release/jiocoders/jio_inet.svg)](https://GitHub.com/jiocoders/jio_inet/releases/)
