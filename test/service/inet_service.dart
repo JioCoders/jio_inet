@@ -14,7 +14,7 @@ class InetService {
           isConnected = true;
         case INetResult.wifi:
           isConnected = true;
-          // Not connected
+        // Not connected
         default:
       }
     }
