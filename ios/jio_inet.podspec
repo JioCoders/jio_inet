@@ -4,18 +4,20 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'jio_inet'
-  s.version          = '0.0.1'
-  s.summary          = 'A new Flutter plugin project.'
+  s.version          = '1.1.1'
+  s.summary          = 'Pod for flutter plugin.'
   s.description      = <<-DESC
-A new Flutter plugin project.
+Flutter plugin to check the current connection and listener on connection changed.
                        DESC
-  s.homepage         = 'http://example.com'
-  s.license          = { :file => '../LICENSE' }
-  s.author           = { 'Your Company' => 'email@example.com' }
-  s.source           = { :path => '.' }
+  s.homepage         = 'https://github.com/jiocoders/jio_inet/'
+  s.license          = { :type => 'MIT', :file => '../LICENSE' }
+  s.author           = { 'Jiocoders' => 'jiocoders@gmail.com' }
+#   s.source           = { :path => '.' }
+  s.source           = { :git => 'https://github.com/jiocoders/jio_inet.git', :tag => s.version.to_s }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
   s.platform = :ios, '12.0'
+  s.requires_arc     = true
 
   # Flutter.framework does not contain a i386 slice.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }

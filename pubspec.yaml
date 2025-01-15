@@ -16,9 +16,12 @@ environment:
   flutter: '>=3.3.0'
 
 dependencies:
-  collection: ^1.18.0
   flutter:
     sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
+  web: ^1.1.0
+  collection: ^1.18.0
   plugin_platform_interface: ^2.0.2
 
 dev_dependencies:
@@ -53,6 +56,9 @@ flutter:
         pluginClass: JioInetPlugin
       ios:
         pluginClass: JioInetPlugin
+      web:
+        pluginClass: JioInetWeb
+        fileName: jio_inet_web_web.dart
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:

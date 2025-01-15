@@ -1,5 +1,6 @@
 import Flutter
 import UIKit
+import jio_inet
 
 @main
 @objc class AppDelegate: FlutterAppDelegate {
