@@ -1,6 +1,7 @@
 #
 # To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html.
 # Run `pod lib lint jio_inet.podspec` to validate before publishing.
+# cocoapods - https://cocoapods.org/pods/jio_inet
 #
 Pod::Spec.new do |s|
   s.name             = 'jio_inet'
@@ -14,9 +15,12 @@ Flutter plugin to check the current connection and listener on connection change
   s.author           = { 'Jiocoders' => 'jiocoders@gmail.com' }
 #   s.source           = { :path => '.' }
   s.source           = { :git => 'https://github.com/jiocoders/jio_inet.git', :tag => s.version.to_s }
-  s.source_files = 'Classes/**/*'
+#   s.source_files     = 'Classes/**/*'
+  s.source_files  = 'lib/**/*.{dart}'
+  s.platform         = :ios, '9.0'
+#   s.ios.vendored_frameworks = 'jio_inet.framework'
+#   s.vendored_frameworks = 'ios/Classes/jio_inet.framework'
   s.dependency 'Flutter'
-  s.platform = :ios, '12.0'
   s.requires_arc     = true
 
   # Flutter.framework does not contain a i386 slice.
