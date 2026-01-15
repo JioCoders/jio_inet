@@ -12,3 +12,8 @@
 
 * fixed/iOS listener
 * github action badge update
+
+
+## 1.1.2
+
+* fixed/flutter-ci
