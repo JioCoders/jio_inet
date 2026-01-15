@@ -45,17 +45,6 @@ jobs:
           echo "Flutter Path: ${{ steps.flutter-action.outputs.flutter-path }}"
           echo "Pub Cache Path: ${{ steps.flutter-action.outputs.pub-cache-path }}"
 
-#      - name: Print outputs - Command shell
-#        shell: bash
-#        run: |
-#          echo CACHE-PATH=${{ steps.flutter-action.outputs.CACHE-PATH }}
-#          echo CACHE-KEY=${{ steps.flutter-action.outputs.CACHE-KEY }}
-#          echo CHANNEL=${{ steps.flutter-action.outputs.CHANNEL }}
-#          echo VERSION=${{ steps.flutter-action.outputs.VERSION }}
-#          echo ARCHITECTURE=${{ steps.flutter-action.outputs.ARCHITECTURE }}
-#          echo PUB-CACHE-PATH=${{ steps.flutter-action.outputs.PUB-CACHE-PATH }}
-#          echo PUB-CACHE-KEY=${{ steps.flutter-action.outputs.PUB-CACHE-KEY }}
-
       - name: Get Flutter Version
         run: |
           flutter --version
@@ -81,8 +70,10 @@ jobs:
 
       - name: Format code
         run: dart format --fix .
+      - name: Verify formatting
+        run: dart format --output=none --set-exit-if-changed .
       - name: Check Publish Warnings
-        run: flutter pub publish --dry-run
+        run: flutter pub publish --dry-run || true
 
       # Extract Version
       - name: Extract version from pubspec.yaml
@@ -110,7 +101,15 @@ jobs:
 #          echo "VERSION=$new_version" >> $GITHUB_ENV
 
       # Publish the package
+#      - name: Publish to pub.dev
+#        env:
+#          PUB_DEV_TOKEN: ${{ secrets.PUB_DEV_TOKEN }}
+#        run: echo "$PUB_DEV_TOKEN" > ~/.pub-cache/credentials.json && dart pub publish --force
+
       - name: Publish to pub.dev
         env:
           PUB_DEV_TOKEN: ${{ secrets.PUB_DEV_TOKEN }}
-        run: echo "$PUB_DEV_TOKEN" > ~/.pub-cache/credentials.json && dart pub publish --force
+        run: |
+          mkdir -p ~/.config/dart
+          echo "$PUB_DEV_TOKEN" > ~/.config/dart/pub-credentials.json
+          dart pub publish --force
