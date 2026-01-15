@@ -1,6 +1,10 @@
 # jio_inet
 
-![Flutter CI](https://github.com/jiocoders/jio_inet/actions/workflows/flutter-ci.yml/badge.svg)
+[![pub package](https://img.shields.io/pub/v/jio_inet.svg)](https://pub.dev/packages/jio_inet)
+[![GitHub release](https://img.shields.io/github/release/jiocoders/jio_inet.svg)](https://GitHub.com/jiocoders/jio_inet/releases/)
+[![pub points](https://img.shields.io/pub/points/jio_inet?color=2E8B57&label=pub%20points)](https://pub.dev/packages/jio_inet/score)
+[![jio_inet](https://github.com/JioCoders/jio_inet/actions/workflows/flutter-ci.yml/badge.svg)](https://github.com/JioCoders/jio_inet/actions/workflows/flutter-ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Description
 
@@ -15,7 +19,6 @@ connection is changed.
 ## Performance Metrics
 
 - **Build Status:** The current status of the CI build.
-- **Test Coverage:** Information about test coverage (if you have a coverage tool integrated).
 - **Build Time:** Average build time for the CI.
 
 ## Getting Started
@@ -212,4 +215,5 @@ void dispose() {
 
 [![Pub](https://img.shields.io/pub/v/jio_inet.svg)](https://pub.dev/packages/jio_inet)
 [![GitHub release](https://img.shields.io/github/release/jiocoders/jio_inet.svg)](https://GitHub.com/jiocoders/jio_inet/releases/)
+[![pub points](https://img.shields.io/pub/points/jio_inet?color=2E8B57&label=pub%20points)](https://pub.dev/packages/jio_inet/score)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
