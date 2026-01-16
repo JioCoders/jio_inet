@@ -110,30 +110,14 @@ jobs:
       - name: Get latest tag
         id: get_latest_tag
         run: |
-          # Try to get the latest tag; default to v0.0.0 if none exist
-          # LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
           # Find the latest tag matching the 'v*' pattern, sorted by version
           LATEST_TAG=$(git tag --sort=-v:refname -l "v[0-9]*" | head -n 1)
           echo "Latest tag: $LATEST_TAG"
           echo "LATEST_TAG=${LATEST_TAG}" >> $GITHUB_ENV
 
-#      - name: Get latest tag and calculate next
-#        id: determine_new_tag
-#        run: |
-#          # Remove leading 'v' if present and split the version into parts
-#          VERSION=${LATEST_TAG#v}
-#          IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
-#          # Increment the patch version
-#          NEW_PATCH=$((PATCH + 1))
-#          NEW_TAG="v${MAJOR}.${MINOR}.${NEW_PATCH}"
-#          echo "New tag will be: $NEW_TAG"
-#          echo "NEW_TAG=$NEW_TAG" >> $GITHUB_ENV
       - name: Calculate Next Version Tag
         id: determine_tag
         run: |
-          # Find the latest tag matching the 'v*' pattern, sorted by version
-          # LATEST_TAG=$(git tag --sort=-v:refname -l "v[0-9]*" | head -n 1)
-          
           if [ -z "$LATEST_TAG" ]; then
             LATEST_TAG="v0.0.0"
           fi
@@ -165,12 +149,14 @@ jobs:
       - name: Create GitHub Release
         uses: ncipollo/release-action@v1
         with:
-          tag: ${{ github.ref_name }}
-          name: Release ${{ github.ref_name }}
+          tag: ${{ env.NEW_TAG }}  # Use the calculated tag (v0.0.2)
+          name: Release ${{ env.NEW_TAG }}
           body: |
-            Automated release for tag ${{ github.ref_name }}.
+            Automated release for version ${{ env.NEW_TAG }}.
+            Built from branch: ${{ github.ref }}
         env:
-          GITHUB_TOKEN: ${{ secrets.PUB_DEV_CREDENTIALS }}
+          token: ${{ secrets.GITHUB_TOKEN }} # Use standard token for repo access
+#          GITHUB_TOKEN: ${{ secrets.PUB_DEV_CREDENTIALS }}
 
   publish:
     needs: build # Wait for the build job to create the tag
