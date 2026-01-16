@@ -155,12 +155,14 @@ jobs:
             Automated release for version ${{ env.NEW_TAG }}.
             Built from branch: ${{ github.ref }}
         env:
-          token: ${{ secrets.GITHUB_TOKEN }} # Use standard token for repo access
-#          GITHUB_TOKEN: ${{ secrets.PUB_DEV_CREDENTIALS }}
+          GITHUB_TOKEN: ${{ secrets.PUB_DEV_CREDENTIALS }}
 
   publish:
+    name: Publish to Pub.dev
+    # if: startsWith(github.ref, 'refs/tags/v') # Only run if this is a tag push
+    # Change: Run if the build job was successful on the main branch
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build # Wait for the build job to create the tag
-    if: startsWith(github.ref, 'refs/tags/v') # Only run if this is a tag push
     permissions:
       id-token: write # Required for authentication using OIDC
     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
