@@ -21,7 +21,7 @@ jobs:
   build:
     name: Flutter Build & Release
     # Only run the tagging logic on pushes to main, not on tag creation or PRs
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    #    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
 
     steps:
@@ -100,12 +100,12 @@ jobs:
           fi
 
       # Modify Tag if it Exist
-#      - name: Modify Tag
-#        if: env.TAG_EXISTS == 'true'
-#        id: modify_tag
-#        run: |
-#          new_version="${{ env.VERSION }}-build-${{ github.run_number }}"
-#          echo "VERSION=$new_version" >> $GITHUB_ENV
+      #      - name: Modify Tag
+      #        if: env.TAG_EXISTS == 'true'
+      #        id: modify_tag
+      #        run: |
+      #          new_version="${{ env.VERSION }}-build-${{ github.run_number }}"
+      #          echo "VERSION=$new_version" >> $GITHUB_ENV
 
       - name: Get latest tag
         id: get_latest_tag
@@ -155,4 +155,4 @@ jobs:
     with:
       # Specify the github actions deployment environment
       environment: 'PUB_DEV_CREDENTIALS'
-        # working-directory: path/to/package/within/repository
+      # working-directory: path/to/package/within/repository
