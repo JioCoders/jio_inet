@@ -14,34 +14,38 @@ on:
     branches: [ "main" ]
 
 permissions:
-  contents: write
+  contents: write # Required to push the new tag
+  pull-requests: read
 
 jobs:
   build:
     name: Flutter Build & Release
+    # Only run the tagging logic on pushes to main, not on tag creation or PRs
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
 
     steps:
       - name: Clone repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetches all history for all tags and branches
 
       # Note: This workflow uses the latest stable version of the Dart SDK.
       # You can specify other versions if desired, see documentation here:
       # https://github.com/dart-lang/setup-dart/blob/main/README.md
       # - uses: dart-lang/setup-dart@v1
 
-      #      - uses: dart-lang/setup-dart@9a04e6d73cca37bd455e0608d7e5092f881fd603
+      # - uses: dart-lang/setup-dart@9a04e6d73cca37bd455e0608d7e5092f881fd603
       - name: Setup Flutter Environment
         uses: subosito/flutter-action@v2
         id: flutter-action
         with:
           channel: stable # [dev, beta]
           flutter-version: 3.24.4 #[5b12b74, tag, commit, branch, main]
-          #          flutter-version-file: pubspec.yaml # path to pubspec.yaml [exact-ver]
+          # flutter-version-file: pubspec.yaml # path to pubspec.yaml [exact-ver]
           # optional parameters follow
           cache: true
-          cache-key: "flutter-:os:-:channel:-:version:-:arch:-:hash:" # optional, change this to force refresh cache
-          pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:-:hash:" # optional, change this to force refresh cache of dart pub get dependencies
+
       - name: Print outputs - Command shell
         shell: bash
         run: |
@@ -96,12 +100,12 @@ jobs:
           fi
 
       # Modify Tag if it Exist
-      - name: Modify Tag
-        if: env.TAG_EXISTS == 'true'
-        id: modify_tag
-        run: |
-          new_version="${{ env.VERSION }}-build-${{ github.run_number }}"
-          echo "VERSION=$new_version" >> $GITHUB_ENV
+#      - name: Modify Tag
+#        if: env.TAG_EXISTS == 'true'
+#        id: modify_tag
+#        run: |
+#          new_version="${{ env.VERSION }}-build-${{ github.run_number }}"
+#          echo "VERSION=$new_version" >> $GITHUB_ENV
 
       - name: Get latest tag
         id: get_latest_tag
@@ -111,7 +115,7 @@ jobs:
           echo "Latest tag: $LATEST_TAG"
           echo "LATEST_TAG=${LATEST_TAG}" >> $GITHUB_ENV
 
-      - name: Determine new tag version
+      - name: Get latest tag and calculate next
         id: determine_new_tag
         run: |
           # Remove leading 'v' if present and split the version into parts
@@ -121,7 +125,7 @@ jobs:
           NEW_PATCH=$((PATCH + 1))
           NEW_TAG="v${MAJOR}.${MINOR}.${NEW_PATCH}"
           echo "New tag will be: $NEW_TAG"
-          echo "NEW_TAG=${NEW_TAG}" >> $GITHUB_ENV
+          echo "NEW_TAG=$NEW_TAG" >> $GITHUB_ENV
 
       - name: Create and push new tag
         run: |
@@ -143,6 +147,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PUB_DEV_CREDENTIALS }}
 
   publish:
+    needs: build # Wait for the build job to create the tag
+    if: startsWith(github.ref, 'refs/tags/v') # Only run if this is a tag push
     permissions:
       id-token: write # Required for authentication using OIDC
     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
