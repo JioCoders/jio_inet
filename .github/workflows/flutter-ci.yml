@@ -159,9 +159,9 @@ jobs:
 
   publish:
     name: Publish to Pub.dev
-    # if: startsWith(github.ref, 'refs/tags/v') # Only run if this is a tag push
+    if: startsWith(github.ref, 'refs/tags/v') # Only run if this is a tag push
     # Change: Run if the build job was successful on the main branch
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+#    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build # Wait for the build job to create the tag
     permissions:
       id-token: write # Required for authentication using OIDC
