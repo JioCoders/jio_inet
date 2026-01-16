@@ -138,6 +138,20 @@ jobs:
           echo "NEW_TAG=$NEW_TAG" >> $GITHUB_ENV
           echo "Targeting Tag: $NEW_TAG"
 
+#      - name: Update version in pubspec.yaml
+#        run: |
+#          # Remove the 'v' from our NEW_TAG to get just the numbers (e.g., 1.1.6)
+#          CLEAN_VERSION=${NEW_TAG#v}
+#          # Use sed to replace the version line in pubspec.yaml
+#          sed -i "s/^version: .*/version: $CLEAN_VERSION/" pubspec.yaml
+#
+#          # Commit the change back to the repository
+#          git config --global user.name "github-actions[bot]"
+#          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+#          git add pubspec.yaml
+#          git commit -m "chore: bump version to $CLEAN_VERSION"
+#          git push origin main
+
       - name: Create and push new tag
         run: |
           git config --global user.name "github-actions[bot]"
