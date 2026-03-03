@@ -1,0 +1,34 @@
+---------------------Webview.dart--------------------
+flutter create --template=plugin --platforms=android,ios --org com.jiocoders --android-language kotlin --ios-language swift jio_webview
+//----------------------------------------------
+export PATH=~/Documents/src/flutter/bin:$PATH
+//----------------------------------------------
+podspec commands
+sudo xcodebuild -license accept
+
+pod trunk register jiocoders@gmail.com 'Jiocoders' --description='macbook air'
+pod trunk me
+pod lib lint jio_inet.podspec
+pod trunk push
+
+pod repo add jio_inet https://github.com/jiocoders/jio_inet.git main
+pod repo update
+pod repo push REPO
+//----------------------------------------------
+git push origin -d branch-name
+git branch --delete <branch-name>
+git pull --rebase origin main
+git tag v1.0.0
+git push origin tag v1.0.0
+//----------------------download module------------------------
+dart run build_runner build
+dart pub login
+dart pub logout
+https://github.com/JioCoders/jio_webview.git
+dart pub token add https://some-package-repo.com/my-org/my-repo
+Enter secret token: <Type token on stdin>
+dart pub token add https://other-package-repo.com/ --env-var TOKEN_VAR
+Requests to "https://other-package-repo.com/" will now be authenticated using the secret token stored in the environment variable "TOKEN_VAR".
+dart pub token remove https://other-package-repo.com
+dart pub token remove --all
+---------------------Webview.dart--------------------
